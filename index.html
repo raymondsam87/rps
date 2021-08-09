@@ -1,0 +1,122 @@
+
+<body>
+    <head>
+
+    </head>
+</body>
+<script>
+    // create a function called computerPlay that returns strings Rock Paper Scissors
+// create a variable called computerSelection that returns rock paper scissors.
+// if 0, then rock. if 1, then paper. if 2, then scissors. store that result in computerSelection
+
+function computerPlay() {
+    function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+    }
+    let computerSelection = getRandomInt(3);
+
+    console.log (computerSelection);
+
+    if (computerSelection === 0 ) {
+        return computerSelection = 'Rock';
+    } else if (computerSelection === 1) {
+        return computerSelection = 'Paper'
+    } else {
+        return computerSelection = 'Scissors'
+    }
+
+console.log (computerSelection);
+
+}
+
+
+
+//create an input that will store into playerSelection
+//ask the user to pick Rock, Paper, or Scissors store into playerSelection variable
+
+
+function playerPlay() {
+    let playerSelection = prompt ('Rock, Paper or Scissors?');
+    console.log (playerSelection);
+
+    if (playerSelection.toUpperCase() === 'ROCK' ) {
+        return playerSelection = 'Rock';
+    } else if (playerSelection.toUpperCase() === 'PAPER') {
+        return playerSelection = 'Paper';
+    } else if (playerSelection.toUpperCase() === 'SCISSORS') {
+        return playerSelection = 'Scissors';
+    } else {
+        alert ('That\s not a choice!!!');
+    }
+
+    console.log (playerSelection);
+
+}
+
+// function called playRound that will compare the variables playerSelectio and computerSelection and determined who won
+// If a player picks rock, he wins against scissors and loses to paper
+// if a player picks scissors, he wins  against paper and loses against rock
+// if a player picks paper, he wins  against rock and loses against scissors
+// Output text that tells the player whether or not they beat the computerPlay
+
+function playRound (playerSelection, computerSelection) {
+    let whoWon;
+    if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
+        alert ('You win! Your Rock beats the computers Scissors');
+        whoWon = 'Player';
+        return whoWon;
+    } else if (playerSelection === 'Rock' && computerSelection === 'Paper') {
+        alert ('You lose! Your Rock loses to the computers Paper');
+        whoWon = 'Computer';
+        return whoWon;
+    } else if (playerSelection === 'Scissors' && computerSelection === 'Rock') {
+        alert ('You lose! Your Scissors loses to the computers Rock');
+        whoWon = 'Computer';
+        return whoWon;
+    } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
+        alert ('You Win! Your Scissors beats the computers Paper');
+        whoWon = 'Player';
+        return whoWon;
+    } else if (playerSelection === 'Paper' && computerSelection === 'Scissors') {
+        alert ('You lose! Your Paper loses to the computers Scissors');
+        whoWon = 'Computer';
+        return whoWon;
+    } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
+        alert ('You Win! Your Paper beats the computers Rock');
+        whoWon = 'Player';
+        return whoWon;
+    } else if (playerSelection === computerSelection) {
+        alert ('It\s a tie! You both chose ' + playerSelection);
+    }
+}
+
+
+
+//creatr a function called game(), that keeps track of score for 5 games. 
+// Game has variables that keep the score playerScore and computerScore
+// When function returns playerWins, increase that tally by 1, same for computerScore
+
+function game () {
+    let playerScore = 0; 
+    let computerScore = 0;
+
+    while (playerScore < 3 && computerScore < 3) {
+        let whoWon = playRound(playerPlay(),computerPlay());
+        if (whoWon === 'Player') {
+            playerScore++;
+        } else if (whoWon === 'Computer') {
+            computerScore++;
+        }
+        alert('The score is now: You: ' + playerScore + " Computer: " + computerScore);
+    } 
+
+        if (playerScore === 3) {
+            alert ('You won the set!');
+        } else {
+            alert ('The computer won the set!')
+        }
+      
+
+}
+
+</script>
