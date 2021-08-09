@@ -3,6 +3,11 @@
     <head>
 
     </head>
+    <button id="rock">Rock</button>
+    <button id="Paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <div id="result"></div>
+    
 </body>
 <script>
     // create a function called computerPlay that returns strings Rock Paper Scissors
@@ -28,9 +33,6 @@ function computerPlay() {
 console.log (computerSelection);
 
 }
-
-
-
 //create an input that will store into playerSelection
 //ask the user to pick Rock, Paper, or Scissors store into playerSelection variable
 
@@ -61,32 +63,33 @@ function playerPlay() {
 
 function playRound (playerSelection, computerSelection) {
     let whoWon;
+    let result = document.querySelector('#result');
     if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
-        alert ('You win! Your Rock beats the computers Scissors');
+        result.textContent = 'You win! Your Rock beats the computers Scissors';
         whoWon = 'Player';
         return whoWon;
     } else if (playerSelection === 'Rock' && computerSelection === 'Paper') {
-        alert ('You lose! Your Rock loses to the computers Paper');
+        result.textContent = 'You lose! Your Rock loses to the computers Paper';
         whoWon = 'Computer';
         return whoWon;
     } else if (playerSelection === 'Scissors' && computerSelection === 'Rock') {
-        alert ('You lose! Your Scissors loses to the computers Rock');
+        result.textContent = 'You lose! Your Scissors loses to the computers Rock';
         whoWon = 'Computer';
         return whoWon;
     } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
-        alert ('You Win! Your Scissors beats the computers Paper');
+        result.textContent = 'You Win! Your Scissors beats the computers Paper';
         whoWon = 'Player';
         return whoWon;
     } else if (playerSelection === 'Paper' && computerSelection === 'Scissors') {
-        alert ('You lose! Your Paper loses to the computers Scissors');
+        result.textContent = 'You lose! Your Paper loses to the computers Scissors';
         whoWon = 'Computer';
         return whoWon;
     } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
-        alert ('You Win! Your Paper beats the computers Rock');
+        result.textContent = 'You Win! Your Paper beats the computers Rock';
         whoWon = 'Player';
         return whoWon;
     } else if (playerSelection === computerSelection) {
-        alert ('It\s a tie! You both chose ' + playerSelection);
+        result.textContent = 'It\s a tie! You both chose ' + playerSelection;
     }
 }
 
@@ -118,5 +121,21 @@ function game () {
       
 
 }
+
+function playButton(e) {
+    let playerSelection;
+    console.log(e.target.id);
+    if (e.target.id === 'rock') {
+        playerSelection = 'Rock';
+    } else if (e.target.id === 'paper') {
+        playerSelection = 'Paper';
+    } else {
+        playerSelection = 'Scissors';
+    }
+    playRound(playerSelection, computerPlay());
+}
+
+addEventListener ('click', playButton);
+
 
 </script>
