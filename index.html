@@ -3,10 +3,12 @@
     <head>
 
     </head>
+    <h1>First to 5 wins! </h1>
     <button id="rock">Rock</button>
     <button id="Paper">Paper</button>
     <button id="scissors">Scissors</button>
     <div id="result"></div>
+    <div id="score"></div>
     
 </body>
 <script>
@@ -67,7 +69,6 @@ function playRound (playerSelection, computerSelection) {
     if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
         result.textContent = 'You win! Your Rock beats the computers Scissors';
         whoWon = 'Player';
-        return whoWon;
     } else if (playerSelection === 'Rock' && computerSelection === 'Paper') {
         result.textContent = 'You lose! Your Rock loses to the computers Paper';
         whoWon = 'Computer';
@@ -91,17 +92,31 @@ function playRound (playerSelection, computerSelection) {
     } else if (playerSelection === computerSelection) {
         result.textContent = 'It\s a tie! You both chose ' + playerSelection;
     }
+
 }
 
 
 
-//creatr a function called game(), that keeps track of score for 5 games. 
+//create a function called game(), that keeps track of score for 5 games. 
 // Game has variables that keep the score playerScore and computerScore
 // When function returns playerWins, increase that tally by 1, same for computerScore
+
+function scoreKeep (whoWon, playerScore, computerScore){
+    let score = document.querySelector('#score');
+    if (whoWon === 'Player') {
+        playerScore++;
+        return playerScore;
+    } else if (whoWon === 'Computer') {
+        computerScore++;
+        return computerScore;
+    }
+
+}
 
 function game () {
     let playerScore = 0; 
     let computerScore = 0;
+    let score = document.querySelector('#score');
 
     while (playerScore < 3 && computerScore < 3) {
         let whoWon = playRound(playerPlay(),computerPlay());
@@ -110,7 +125,6 @@ function game () {
         } else if (whoWon === 'Computer') {
             computerScore++;
         }
-        alert('The score is now: You: ' + playerScore + " Computer: " + computerScore);
     } 
 
         if (playerScore === 3) {
@@ -122,8 +136,13 @@ function game () {
 
 }
 
+let playerScore = 0; 
+let computerScore = 0;
+
 function playButton(e) {
     let playerSelection;
+
+
     console.log(e.target.id);
     if (e.target.id === 'rock') {
         playerSelection = 'Rock';
@@ -132,7 +151,23 @@ function playButton(e) {
     } else {
         playerSelection = 'Scissors';
     }
-    playRound(playerSelection, computerPlay());
+
+
+    let whoWon = playRound(playerSelection, computerPlay());
+    if (whoWon === 'Player') {
+            playerScore++;
+        } else if (whoWon === 'Computer') {
+            computerScore++;
+        }
+    
+    if (playerScore < 5 && computerScore < 5) {
+        score.textContent ='The score is now: You: ' + playerScore + " Computer: " + computerScore;
+    } else if (playerScore >= 5 && computerScore < 5) {
+        score.textContent ='Player wins the first to 5!';
+    } else if (computerScore >= 5 && playerScore <5) {
+        score.textContent ='Computer wins the first to 5!';
+    }
+
 }
 
 addEventListener ('click', playButton);
